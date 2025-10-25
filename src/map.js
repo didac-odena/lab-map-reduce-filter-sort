@@ -7,7 +7,11 @@
  * @returns [1, 2, 3, -1]
  */
 function parseNumbers(numbersAsString) {
-  
+  return numbersAsString.map(num => {
+    const parsed = Number(num);
+    if (isNaN(parsed)) return -1;
+    return parsed;
+  });
 }
 
 /**
@@ -16,7 +20,10 @@ function parseNumbers(numbersAsString) {
  * @returns [0, 3, 2, 5]
  */
 function sumEvenSubOdd(numbers) {
-  
+  return numbers.map (num => {
+    if (num % 2 === 0) return num + 1;
+    if (num % 2 === 1) return num - 1;
+    });
 }
 
 /**
@@ -80,7 +87,20 @@ function sumEvenSubOdd(numbers) {
     ]
  */
 function buildStudentsAvg(students) {
-  
+  return students.map(student => {
+    if (!student.marks || student.marks.length === 0) {
+      return { ...student, avg: 0 };
+    }
+    const grades = student.marks.map(m => m.grade);
+
+    const sum = grades.reduce((acc, g) => acc + g, 0);
+
+    const avg = sum / grades.length;
+
+    student.avg = avg;
+    
+    return student;
+  });
 }
 
 /**
