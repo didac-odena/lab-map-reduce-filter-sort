@@ -5,7 +5,9 @@
  * @returns [2, 4]
  */
 function getEvens(numbers) {
-  
+  return numbers.filter(n => 
+    n % 2 === 0
+  )
 }
 
 
@@ -15,7 +17,9 @@ function getEvens(numbers) {
  * @returns [1, 2, false, "a"]
  */
 function clean(elements) {
-  
+  return elements.filter(n =>
+    n !== null && n !== undefined
+  )
 }
 
 
@@ -39,7 +43,7 @@ function clean(elements) {
  * @returns [1, 2, false, "a"]
  */
 function filterBySkill(users, skill) {
-  
+  return users.filter(user => user.skills.includes(skill));
 } 
 
 
