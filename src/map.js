@@ -91,14 +91,14 @@ function buildStudentsAvg(students) {
     if (!student.marks || student.marks.length === 0) {
       return { ...student, avg: 0 };
     }
-    const grades = student.marks.map(m => m.grade);
+    const sumOfGrades = student
+      .marks
+      .reduce(
+        (sumOfGrades, mark) => mark.grade + sumOfGrades,
+        0
+      );
+    student.avg = sumOfGrades / student.marks.length
 
-    const sum = grades.reduce((acc, g) => acc + g, 0);
-
-    const avg = sum / grades.length;
-
-    student.avg = avg;
-    
     return student;
   });
 }
@@ -114,7 +114,10 @@ function buildStudentsAvg(students) {
  * // [{name: "Bread", price: 2, quantity: 3, total: 6}]
  */
 function addTotalPrice(products) {
-
+  return products.map(n => {
+    const total = n.price * n.quantity
+    return { ...n, total: total}
+  })
 }
 
 
