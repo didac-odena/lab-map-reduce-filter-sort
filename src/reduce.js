@@ -1,11 +1,15 @@
+const { useReducer } = require("react");
 
 /**
  * Suma todos los números de un array
  * @param [1, 2, 3, 4] numbers
  * @returns [2, 4]
  */
-function sum(numbers) {
-  
+function sum(numbers) { 
+   return numbers
+      .reduce((acc, number) => acc + number,
+      0
+) 
 }
 
 
@@ -19,9 +23,14 @@ function sum(numbers) {
  * @returns [{ name: 'Juanito', grade: 9 }]
  */
 function bestStudent(students) {
-  
+   if (students.length === 0) return undefined;
+   return students.reduce((acc, student) => {
+    if (student.grade > acc.grade) {
+      acc = student;
+    }
+    return acc;
+  });
 }
-
 
 /**
  * Dado un array de palabras, devuelve un diccionario con el número de apariciones.
@@ -38,7 +47,14 @@ function bestStudent(students) {
   }
  */
 function countWords(words) {
-  
+  return words.reduce((acc, word) => {
+    if (acc[word]) {
+      acc[word] += 1;
+    } else {
+      acc[word] = 1;
+    }
+    return acc;
+  }, {});
 }
 
 /**
@@ -52,7 +68,10 @@ function countWords(words) {
  * // 6
  */
 function getTotalPrice(products) {
-
+   return products.reduce((acc, n) => { 
+   acc += n.price
+   return acc}
+   , 0)
 }
 
 /**
@@ -66,8 +85,18 @@ function getTotalPrice(products) {
  * // { Fruit: 2, Vegetable: 1 }
  */
 function countByCategory(products) {
-   
+  return products.reduce((acc, n) => {
+   const category = n.category;
+
+   if (acc[category]) {
+   acc[category] = acc[category] + 1;
+   } else {
+   acc[category] = 1;
+   }
+    return acc;
+   }, {});
 }
+
 
 /**
  * Concatena los nombres en una sola cadena separada por comas.
@@ -80,7 +109,14 @@ function countByCategory(products) {
  * // "Anna, Carlos, Bea"
  */
 function joinNames(users) {
-
+  return users.reduce((acc, n, i) => {
+    if (i === 0) {
+      acc = n.name;
+    } else {
+      acc += ", " + n.name;
+    }
+    return acc;
+  }, "");
 }
 
 
